@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jautocalc@1.3.1/dist/jautocalc.js"></script>
+	
+
+    <title>Document</title>
+
+    <script type="text/javascript" src="dist/jautoCalc.js"></script>
+    <script type="text/javascript">
+
+        <!--   
+            $(function() {  
+                function autoCalcSetup() {
+				$('form#cart').jAutoCalc('destroy');
+				$('form#cart tr.line_items').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
+				$('form#cart').jAutoCalc({decimalPlaces: 2});
+			}
+			autoCalcSetup();
+
+
+			$('button.row-remove').on("click", function(e) {
+				e.preventDefault();
+
+				var form = $(this).parents('form')
+				$(this).parents('tr').remove();
+				autoCalcSetup();
+
+			});
+
+			$('button.row-add').on("click", function(e) {
+				e.preventDefault();
+
+				var $table = $(this).parents('table');
+				var $top = $table.find('tr.line_items').first();
+				var $new = $top.clone(true);
+
+				$new.jAutoCalc('destroy');
+				$new.insertBefore($top);
+				$new.find('input[type=text]').val('');
+				autoCalcSetup();
+
+			});
+
+		});
+        -->
+        
+    </script>
+</head>
+<body onload="setDate();">
+     
+    <div>
+            <h3 style="text-align: center; color: blue;"><strong>Maaax Shopiee</strong></h3>
+
+        <!-- ------------------invoice address and date--------------------------->
+        <p>
+            <label style="margin-left: 100px;" >Invoice No:</label> 
+                <input type="text" value="" name="invoice" size="19.5">
+                <a style="padding-left: 280px;"> <i class="fa fa-address-book"></i> Manjri Road Hadapsar Pune.</a>
+            </p>    
+        
+            <!---------------------------- Datee -and cust-------------------------------->
+        <script type="text/javascript">
+            function setDate()
+            {
+                var date= new Date();
+
+                var day  = date.getDate();
+                var month= date.getMonth() +1;
+                var year = date.getFullYear();
+
+                if(month <10)  month ="0" + month;
+                if(day<10) day="0" +day;
+                var today=year+"-" + month + "-"+ day;
+
+                document.getElementById('myDate').vvalue = today;
+            }
+        </script>
+
+        <p>
+            <lable style="margin-left: 50px;" for="Buyer">Customer Details:</lable>
+            <input type= "text" />
+            <lable style=" padding-left: 655px;" for="date"> Date:</lable>
+            <input type="date" id="myDate" />
+        </p>
+
+
+        <!---------------------- ---- mob no------------------------------------------------------>
+
+        <p><lable style="margin-left: 100px;" for="Buyer">Mobile No:</lable>
+            <input type= "" value="" name="Mobile No" maxlength="10"/>
+        </p>
+
+
+        <!------------------------------table-------------------------------------------->
+
+        
+            <form id="cart">
+                <table name="cart">
+
+            <table name="cart" table id="myTable" class="table table-striped table-bordered">
+                <tr>
+                    <th>Sr no</th>
+                    <th>Item code</th>
+                    <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>price</th>
+                        <th>Item total</th>
+                        <th>Delete</th>
+                    </tr>
+
+
+                    <script>
+                        function deleteRow(r) {
+                          var i = r.parentNode.parentNode.rowIndex;
+                          document.getElementById("myTable").deleteRow(i);
+                        }
+                        </script>
+                       
+
+                    <tr class="line_items">
+                        <td><input type="text" name="Sr no" size="3" autocomplete="off"> </td>
+                        <td><input type="text" name="Item" size="30"></td>
+                        <td><input type="text" name="prod" size="30"></td>
+                        <td><input type="number" name="qty"  value=" " size="3"></td>
+                        <td><input type="number" name="price" size="9.99"></td>
+                        <td><input type="number" name="item_total" value="" jautoCalc="{qty} * {price}" ></td>
+
+                        <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+                    </tr>
+
+
+
+                    <tr class="line_items">
+                        <td><input type="number" name="Sr no" size="3"></td>
+                        <td><input type="text" name="Item " size="30"></td>
+                        <td><input type="text" name="prod " size="30"></td>
+                        <td><input type="number" name="qty"  value=" " size="3"></td>
+                        <td><input type="number" name="price" size="9.99"></td>
+                        <td><input type="number" name="item_total" value="" jautoCalc="{qty} * {price}" ></td>
+                        <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+                    </tr>
+                   
+<!-------------------------------------------------ROW annd SUB TOTAl --------------------------------------------------------------->
+                    <tr>
+                        <tr>
+                            <td colspan="1"><button class="row-add">Add Row</button></td>
+                
+                        <td clospan="2">&nbsp;</td>
+                        <td clospan="3">&nbsp;</td>
+                        <td clospan="4">&nbsp;</td>
+                
+                        <td><strong>Subtotal :</strong></td>
+                        
+
+                        <td><input type ="number" id="st" name="sub_total" value="" jautoCalc="SUM({item_total})"> </td>
+                        </tr>
+                    </tr>
+<!-------------------------------------------------GST --------------------------------------------------------------->
+                   
+                   
+                        <tr>
+                        <td colspan="3">&nbsp;</td>
+                        <td clospan="4">&nbsp;</td>
+                        <td>
+                            <strong>GST &#x00025; :</strong>
+
+                            <select name="GST">
+                                <option value=".00">0</option>
+                                <option value=".5">5&#x00025;</option>
+                                <option value=".12">12&#x00025;</option>
+                                <option value=".18">18&#x00025;</option>
+                                <option value=".28">28&#x00025;</option>
+                                <option selected value=".00">Please select GST &#x00025;</option>
+                            </select>
+
+                        </td>
+
+                        <td><input type="number" name="tax_total" value="" jautoCalc="{sub_total} *{GST}" ></td>
+                    </tr>
+<!---------------------------------------------------------TOTAL----------------------------------------------------->
+                    
+                    <tr> <td colspan="3">&nbsp;</td>
+                        <td clospan="4">&nbsp;</td>
+                        <td><strong>Total :</strong></td>
+                        <td><input type="number" name="grand_total"  id= "ta" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
+                    </tr>
+                                    
+
+<!----------------------------------------------------------DISCOUNT-------------------------------------------------->
+                    
+                        <script>
+                            var discount_total = nu;
+
+                            if ( parseInt(discount_percent)== 0)
+                            {
+                                return discount_total = 0.00;
+                                return document.getElementById('st');
+                            }
+                            
+
+                        </script>
+                     <tr id="dp">
+                        <td colspan="3">&nbsp;</td>
+                        <td clospan="4">&nbsp;</td>
+                        <td><strong>Discount :<strong></td>
+                        <td><input type="number"  name="discount_percent" value="&#x00025;" ></td>
+            
+                    </tr>
+
+<!----------------------------------------------------------DISCOUNT TOTAl--------------------------------------------------->
+                 
+
+
+                    <tr>
+                        <td colspan="3">&nbsp;</td>
+                        <td clospan="4">&nbsp;</td>
+                        <td><strong>Discount Total :</strong></td>
+                        <td><input type="number" name="discount_total" value="" jautoCalc="{sub_total} - {sub_total * discount_percent }" ></td>
+                    </tr>
+
+<!----------------------------------------------------------FINAL AMOUNT--------------------------------------------------->
+                        <tr id="fa">
+                            <td colspan="3">&nbsp;</td>
+                            <td clospan="4">&nbsp;</td>
+                            <td><strong>Final Total :</strong></td>
+                            <td><input type="number" name="grand_total" value="" jautCalc="{sub_total} + {tax_total}"> </td>
+                        </tr>           
+                        
+ <!----------------------------------------------------------PAYMENT MODE--------------------------------------------------->                    
+                    
+                        <tr>
+                            <td colspan="3">&nbsp;</td>
+                            <td clospan="4">&nbsp;</td>
+                            <td>
+                                <strong>Payment Mode </strong>
+                                <select name="Paymet_Mode">
+                                    <option value=" ">Cash</option>
+                                    <option value="">Credit Card</option>
+                                    <option selected value=" ">Please select Payment Mode</option>
+                                </select>
+                                <script>
+                              var criteria_id =  $(this).attr('data-id');
+                              $('.Payment_Mode').val(criteria_id);
+                            </script>
+    
+                            </td>
+                            <td><input type="text" name="Payment_Mode" value="" ></td>
+                     </tr>
+
+                
+
+ <!----------------------------------------------------------Received Amount--------------------------------------------------->  
+                            
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                                <td clospan="4">&nbsp;</td>
+                                <td><strong>Recceived Amount:</strong></td>
+                                <!-- <td><input type="text" name="grand_total" value="" jautCalc="{sub_total} + {tax_total}"> </td> -->
+                            </tr>        
+
+   <!----------------------------------------------------------Credited MODE--------------------------------------------------->     
+
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                                <td clospan="4">&nbsp;</td>
+                                <td><strong>Credited Amount :</strong></td>
+                                <!-- <td><input type="text" name="grand_total" value="" jautCalc="{sub_total} + {tax_total}"> </td> -->
+                            </tr>        
+
+
+<!--------------------------------------------------------new ,Edit , Save , Print , Clear------------------------------------------->
+
+                  
+                   
+                   
+            
+        
+
+
+</body>
+</html>
